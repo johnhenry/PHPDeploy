@@ -1,0 +1,51 @@
+PHP Deploy - Read Me
+
+Copyright Information (MIT License - http://en.wikipedia.org/wiki/MIT_License):
+	Copyright (C) 2011 by John Henry (john@iamjohnhenry.com)
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Description:
+	PHP Deploy is a sub-application that you may add to your PHP+MYSQL application in order to make it easy to deploy and/or reset. 
+
+How to use it:
+	Getting Started
+		1) Get your database credentials. (Database Host, Database Name, Database Username, and Database Password). This process will vary based on how your server is set up.
+		3) Modify the "deploy/_init_tables.php" and the "deploy/_init_directories.php" files in order to define the MySQL tables and the directories to be created, respectively. Examples are provided within the files themselves.
+		3) Include the "deploy" directory in your root application directory.
+		4) Modify your application's initial "index.php" to direct to "deploy/init.php" if it has not already been initialized. The easiest way to do this is to include within it a reference to "deploy/_init_test.php". This should be placed at the top of the file before anything else is written (even whitespace!). 
+		5) Using a web browser, visit your application's initial "index.php" file. You should be directed to "deploy/init.php". Enter your credentials to get started.
+		*Note - This is just a suggested order. You can pretty much do these steps in any order you want as long as you do #5 last.
+
+	Resetting:
+		Delete the "_credentials.php" file from the "deploy" directory and visit your initial "index.php" file.
+
+	Finishing Up:
+		Once you are satisfied with your application (that is, you do not have to deploy it again), you may remove the "deploy" directory. You should also remove any references to the files in "deploy" from your application's files (namely index.php).
+
+Files Included in PHP Deploy:
+	Instructional Files (Files that tell you how to use PHP Deploy):
+		readme.txt - This file contains information on PHP Deploy and how to use it, but you've probably already figured that out. ;)
+
+	Static Files (Files you don't change):
+		init.php - This is the initial file that you must open in your browser to set up you application. If the "_credentials.php" file had already been created, you will instead see an option to re-initialize your application.
+		init_write.php - After you enter your credentials, this page will create all of the database tables and directories needed for your application. Errors that occur during initialization should show up here.
+
+	Editable Files (Files that you are probably going to want to change):
+		index.php - This is the initial file for you application. It includes references to the "deploy/_init_test.php" file, the "deploy/_open_database.php" file, and the "deploy/_close_database.php" file.
+		init.css - This is used to style the PHP Deploy app. There is little reason to modify this this as end users will not likely use this application, but fell free if you would like.
+		_init_tables.php - This is where you define the queries that create your database's initial tables.
+		_init_directories.php - This is where you define the directories to be created for your application.
+
+	Created Files (Files that are created during the initialization process):
+		_credentials.php - This file holds the credentials used to access your database as well as a reference to the location of your application on the server ($sv_loc) in case the application is not installed in the root directory. The presence of this file also indicates whether or not the application has been initialized. Deleting it and visiting "deploy/index.php" will allow you to re-initialized your application. 
+
+	Include Files (Files that aren't absolutely necessary, but may make it easier for your app to preform certain functions when included)
+		_init_test.php - Include this at the VERY beginning of files that must be initialized for your application to work. It will redirect to "deploy/init.php" if the "_credentials.php". To keep things simple, you may want to only include this in "index.php" and have other files redirect to it. Note: including "_init_test.php" in files that aren't in your root directory may not work as anticipated.
+		_credentials.php - Include this file in any file that you wish to use the the credentials for database access or the aforementioned $sv_loc variable.
+		_open_database.php - Include this wherever you wish to open the database for access. It automatically uses the credentials specified upon initialization.
+		_close_database.php - Include this wherever you wish to close the database for access.

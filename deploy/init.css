@@ -1,0 +1,11 @@
+#info{
+	font-family:Arial;
+	padding: 10px;
+	position: absolute;
+	border:thick solid #6D84B4;
+	left: 30%;
+	right: 30%;
+	top:30%;
+	background-color: #F5F5F5;
+	color:#6D84B4;
+}

@@ -1,0 +1,1 @@
+<?php if(!file_exists("deploy/_credentials.php")) header("Location: deploy/init.php"); require_once("_credentials.php");?>
